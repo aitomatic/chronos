@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  chronos-api:
+    build:
+      context: chronos_api
+    ports:
+      - "8080:8080"
+  chronos-ui:
+    build:
+      context: chronos-ui
+      args:
+        APP_SERVER_HOST: localhost
+        APP_SERVER_PORT: 8080
+    ports:
+      - "80:80"
+    depends_on:
+      - chronos-api
+    links:
+      - chronos-api
